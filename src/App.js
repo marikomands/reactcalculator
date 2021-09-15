@@ -3,31 +3,29 @@ import "./App.css";
 function App() {
   return (
     <div className="calc-app">
-      <form>
-        <input type="text" />
-      </form>
-      <div classname="keypad">
-        <div className="container">
-          <button>AC</button>
-          <button>+/-</button>
-          <button>%</button>
-          <button> /</button>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>×</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>-</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>+</button>
-          <button id="zero">0</button>
-          <button>.</button>
-          <button>=</button>
-        </div>
+      <div className="inputContainer">
+        <input type="text" value="0" />
+      </div>
+      <div className="container">
+        <button className="button-light-gray">AC</button>
+        <button className="button-light-gray">+/-</button>
+        <button className="button-light-gray">%</button>
+        <button className="button-orange"> /</button>
+        <button className="digits">7</button>
+        <button className="digits">8</button>
+        <button className="digits">9</button>
+        <button className="button-orange">×</button>
+        <button className="digits">4</button>
+        <button className="digits">5</button>
+        <button className="digits">6</button>
+        <button className="button-orange">-</button>
+        <button className="digits">1</button>
+        <button className="digits">2</button>
+        <button className="digits">3</button>
+        <button className="button-orange">+</button>
+        <button className="zero">0</button>
+        <button className="dot">.</button>
+        <button className="button-orange equal">=</button>
       </div>
     </div>
   );
