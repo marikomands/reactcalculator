@@ -30,10 +30,10 @@ function App() {
 
   const handleActionClick = (action) => {
     console.log("🚀 ~ handleActionClick ~ handleActionClick", action);
-    setAction(action);
     if (actionNumber) {
       handleCalculate();
     }
+    setAction(action);
   };
 
   const handleCalculate = () => {
