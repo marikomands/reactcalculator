@@ -17,7 +17,7 @@ function App() {
     setMemoryNumber(0);
     setDisplayNumber(0);
     setActionNumber(0);
-    setAction("");
+    setAction("add");
   };
 
   const handleNumberClick = (number) => {
