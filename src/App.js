@@ -2,62 +2,61 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [result, setResult] = useState(0);
-  // const [displayValue, setDisplayValue] = useState(0);
-  // console.log("🚀 ~ file: App.js ~ line 6 ~ displayValue", displayValue);
-  // const [actualValue, setActualValue] = useState(0);
-  // console.log("🚀 ~ file: App.js ~ line 7 ~ actualValue", actualValue);
-  const [action, setAction] = useState(""); // 'plus' 'minus' 'times' 'divide'
-  // console.log("🚀 ~ file: App.js ~ line 10 ~ action", action);
-  // const [actionValue, setActionValue] = useState(0);
-  // console.log("🚀 ~ file: App.js ~ line 10 ~ actionValue", actionValue);
+  console.log("%%%%%% STATE %%%%%%%");
+  const [memoryNumber, setMemoryNumber] = useState(0);
+  console.log("🚀 ~ file: App.js ~ line 6 ~ memoryNumber", memoryNumber);
+  const [displayNumber, setDisplayNumber] = useState(0);
+  console.log("🚀 ~ file: App.js ~ line 8 ~ displayNumber", displayNumber);
+  const [actionNumber, setActionNumber] = useState(0);
+  console.log("🚀 ~ file: App.js ~ line 10 ~ actionNumber", actionNumber);
+  const [action, setAction] = useState("add"); // 'plus' 'minus' 'times' 'divide'
+  console.log("🚀 ~ file: App.js ~ line 12 ~ action", action);
+  console.log("%%%%%% STATE %%%%%%%");
 
   const handleAllClear = () => {
-    setResult(0);
-    // setDisplayValue(0);
-    // setActualValue(0);
-    // setActionValue(0);
-    // setAction("");
+    setMemoryNumber(0);
+    setDisplayNumber(0);
+    setActionNumber(0);
+    setAction("");
   };
 
-  const handleNumberClick = (value) => {
-    // console.log("🚀 ~ file: App.js ~ line 22 ~ handleNumberClick", value);
-    // console.log("🚀 ~ file: App.js ~ line 16 ~ action", action);
-    setResult(Number(`${result}${value}`));　　//文字列に変換してから数字に変換
-    // setResult(result + value.toString());
+  const handleNumberClick = (number) => {
+    console.log("🚀 ~ file: App.js ~ line 31 ~ handleNumberClick", number);
 
-    // if (action) {
-    //   setActionValue(value);
-    // } else {
-    //   setActualValue(value);
-    // }
-
-    // setDisplayValue(displayValue + value);
+    const newNumber = Number(`${actionNumber}${number}`);
+    setActionNumber(newNumber);
+    setDisplayNumber(newNumber);
   };
 
-  const handleCalculate = (value) => {
-    try {
-      setResult(eval(result).toString());
-    } catch (error) {
-      setResult("error");
+  const handleActionClick = (action) => {
+    console.log("🚀 ~ handleActionClick ~ handleActionClick", action);
+    setAction(action);
+    if (actionNumber) {
+      handleCalculate();
     }
-  //   if (action === "add") {
-  //     console.log("ADD");
-  //     const newValue = actualValue + actionValue;
-  //     setActualValue(newValue);
-  //     setDisplayValue(newValue);
-  //   } else {
-  //     console.log("NO_ACTION");
-  //   }
+  };
 
-  //   setAction("");
-  // };
+  const handleCalculate = () => {
+    console.log("🚀 ~ handleCalculate ~ handleCalculate", action);
+    if (action === "add") {
+      const newValue = memoryNumber + actionNumber;
+      setDisplayNumber(newValue);
+      setMemoryNumber(newValue);
+      setActionNumber(0);
+    } else if (action === "minus") {
+      const newValue = memoryNumber - actionNumber;
+      setDisplayNumber(newValue);
+      setMemoryNumber(newValue);
+      setActionNumber(0);
+    } else {
+      console.log("NO_ACTION");
+    }
+  };
 
   return (
     <div className="calc-app">
       <div className="inputContainer">
-        <input type="text" value={result} />
-        {/* <input type="text" value={displayValue} /> */}
+        <input type="text" value={displayNumber} />
       </div>
       <div className="container">
         <button className="button-light-gray" onClick={() => handleAllClear()}>
@@ -66,7 +65,7 @@ function App() {
         <button className="button-light-gray">+/-</button>
         <button className="button-light-gray">%</button>
         <button className="button-orange"> /</button>
-        <button className="digits" onClick={() => handleNumberClick("7")}>
+        <button className="digits" onClick={() => handleNumberClick(7)}>
           7
         </button>
         <button className="digits" onClick={() => handleNumberClick(8)}>
@@ -85,7 +84,12 @@ function App() {
         <button className="digits" onClick={() => handleNumberClick(6)}>
           6
         </button>
-        <button className="button-orange">-</button>
+        <button
+          className="button-orange"
+          onClick={() => handleActionClick("minus")}
+        >
+          -
+        </button>
         <button className="digits" onClick={() => handleNumberClick(1)}>
           1
         </button>
@@ -95,7 +99,10 @@ function App() {
         <button className="digits" onClick={() => handleNumberClick(3)}>
           3
         </button>
-        <button className="button-orange" onClick={() => action("add")}>
+        <button
+          className="button-orange"
+          onClick={() => handleActionClick("add")}
+        >
           +
         </button>
         <button className="zero">0</button>
