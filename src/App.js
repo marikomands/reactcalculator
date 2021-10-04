@@ -56,20 +56,32 @@ function App() {
 
   const handleNumberClick = (value) => {
     console.log("🚀 ~ file: App.js ~ line 31 ~ handleNumberClick", value);
-    const isInteger = actionNumber % 1 === 0;
-    // 27 true
-    // 2.0 true
-    // 0.1 false
 
+    const isInteger = actionNumber.toString().split(".").length === 1;
+    // 27.5
+    // 65
     console.log("🚀 ~ handleNumberClick ~ isInteger", isInteger, actionNumber);
 
     const newNumberString = `${actionNumber}${
       decimal && isInteger ? "." : ""
     }${value}`;
-    const newNumber = Number(newNumberString);
-    if (newNumber.toString() !== newNumberString) {
-    }
     console.log("🚀 ~ handleNumberClick ~ newNumberString", newNumberString);
+
+    // '165.986.'.split('.') --> ['165', '986']
+    const splitNum = newNumberString.split(".");
+    console.log("🚀 ~ handleNumberClick ~ splitNum", splitNum);
+    const numbersAfterDecimal = splitNum[1] || "";
+    console.log(
+      "🚀 ~ handleNumberClick ~ numbersAfterDecimal",
+      numbersAfterDecimal
+    );
+    const numberOfDecimalPlaces = numbersAfterDecimal.length;
+    console.log(
+      "🚀 ~ handleNumberClick ~ numberOfDecimalPlaces",
+      numberOfDecimalPlaces
+    );
+    const newNumber = Number(newNumberString).toFixed(numberOfDecimalPlaces);
+
     console.log("🚀 ~ handleNumberClick ~ newNumber", newNumber);
 
     setDecimal("");
