@@ -3,6 +3,7 @@ import "./App.css";
 
 function App() {
   console.log("%%%%%% STATE %%%%%%%");
+
   const [memoryNumber, setMemoryNumber] = useState(0);
   console.log("🚀 ~ file: App.js ~ line 6 ~ memoryNumber", memoryNumber);
   const [displayNumber, setDisplayNumber] = useState(0);
@@ -11,8 +12,12 @@ function App() {
   console.log("🚀 ~ file: App.js ~ line 10 ~ actionNumber", actionNumber);
   const [action, setAction] = useState("add"); // 'plus' 'minus' 'times' 'divide'
   console.log("🚀 ~ file: App.js ~ line 12 ~ action", action);
-  const [decimal, setDecimal] = useState(false);
+  const [decimal, setDecimal] = useState("");
+  // falseでも可能
   console.log("🚀 ~ App ~ decimal", decimal);
+  // const [plusMinus, setPlusMinus] = useState("");
+  // const [delete, setDelete] = useState("")
+
   console.log("%%%%%% STATE %%%%%%%");
 
   const handleAllClear = () => {
@@ -20,6 +25,33 @@ function App() {
     setDisplayNumber(0);
     setActionNumber(0);
     setAction("add");
+    setDecimal("");
+  };
+
+  const handleDeleteClick = () => {
+    console.log("🚀 ~ handleDeleteClick ~ handleDeleteClick");
+
+    const actionNumberString = `${actionNumber}`;
+    console.log(
+      "🚀 ~ handleDeleteClick ~ actionNumberString",
+      actionNumberString
+    );
+    const updatedNumberString = actionNumberString.slice(0, -1);
+    console.log(
+      "🚀 ~ handleDeleteClick ~ updatedNumberString",
+      updatedNumberString
+    );
+
+    const updatedNumber =
+      updatedNumberString === "-" ? 0 : Number(updatedNumberString);
+
+    console.log("🚀 ~ handleDeleteClick ~ updatedNumber", updatedNumber);
+    // '12' = 12
+    // '1' = 1
+    // '' = 0
+
+    setActionNumber(updatedNumber);
+    setDisplayNumber(updatedNumber);
   };
 
   const handleNumberClick = (value) => {
@@ -31,25 +63,60 @@ function App() {
 
     console.log("🚀 ~ handleNumberClick ~ isInteger", isInteger, actionNumber);
 
-    const newNumber = Number(
-      `${actionNumber}${decimal && isInteger ? "." : ""}${value}`
-    );
+    const newNumberString = `${actionNumber}${
+      decimal && isInteger ? "." : ""
+    }${value}`;
+    const newNumber = Number(newNumberString);
+    if (newNumber.toString() !== newNumberString) {
+    }
+    console.log("🚀 ~ handleNumberClick ~ newNumberString", newNumberString);
+    console.log("🚀 ~ handleNumberClick ~ newNumber", newNumber);
 
-    setDecimal(false);
+    setDecimal("");
     setActionNumber(newNumber);
     setDisplayNumber(newNumber);
+    // setMemoryNumber(newNumber);
   };
+
+  // const handleNumberClick = (value) => {
+  //   // const isInteger = actionNumber % 1 === 0;
+  //   console.log("🚀 ~ handleNumberClick ~ value", value);
+  //   console.log("🚀 ~ handleNumberClick ~ decimal", decimal);
+  //   console.log("🚀 ~ handleNumberClick ~ actionNumber", actionNumber);
+  //   const newNumberString = `${actionNumber}${decimal}${value}`;
+  //   console.log("🚀 ~ handleNumberClick ~ newNumberString", newNumberString);
+  //   const newNumber = Number(newNumberString);
+  //   console.log("🚀 ~ handleNumberClick ~ newNumber", newNumber);
+
+  //   setDecimal("");
+  //   setActionNumber(newNumber);
+  //   setDisplayNumber(newNumber);
+  // };
 
   const handleDecimalClick = () => {
     console.log("🚀 ~ handleDecimalClick ~ handleDecimalClick");
-    setDecimal(true);
+    setDecimal("."); // true でも可能
   };
 
   const handleActionClick = (action) => {
     console.log("🚀 ~ handleActionClick ~ handleActionClick", action);
     setAction(action);
+    setActionNumber(0);
     if (actionNumber) {
       handleCalculate();
+    }
+  };
+
+  const handlePlusMinus = () => {
+    console.log("🚀 ~ handlePlusMinus ~ handlePlusMinus");
+    if (actionNumber > 0) {
+      const updatedNumber = -Math.abs(actionNumber);
+      setDisplayNumber(updatedNumber);
+      setActionNumber(updatedNumber);
+    } else {
+      const updatedNumber = Math.abs(actionNumber);
+      setDisplayNumber(updatedNumber);
+      setActionNumber(updatedNumber);
     }
   };
 
@@ -59,7 +126,7 @@ function App() {
       const newValue = memoryNumber + actionNumber;
       setDisplayNumber(newValue);
       setMemoryNumber(newValue);
-      setActionNumber(0);
+      // setActionNumber(0);
     } else if (action === "minus") {
       const newValue = memoryNumber - actionNumber;
       setDisplayNumber(newValue);
@@ -86,10 +153,12 @@ function App() {
         <input type="text" value={displayNumber} />
       </div>
       <div className="container">
-        <button className="button-light-gray" onClick={() => handleAllClear()}>
+        <button className="button-light-gray" onClick={handleAllClear}>
           AC
         </button>
-        <button className="button-light-gray">+/-</button>
+        <button className="button-light-gray" onClick={handlePlusMinus}>
+          +/-
+        </button>
         <button className="button-light-gray">%</button>
         <button
           className="button-orange"
@@ -145,13 +214,13 @@ function App() {
         <button className="zero" onClick={() => handleNumberClick(0)}>
           0
         </button>
+        <button className="del" onClick={() => handleDeleteClick()}>
+          DEL
+        </button>
         <button name="." className="dot" onClick={() => handleDecimalClick()}>
           .
         </button>
-        <button
-          className="button-orange equal"
-          onClick={() => handleCalculate()}
-        >
+        <button className="button-orange equal" onClick={handleCalculate}>
           {" "}
           ={" "}
         </button>
