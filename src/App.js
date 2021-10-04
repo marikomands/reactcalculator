@@ -58,8 +58,8 @@ function App() {
     console.log("🚀 ~ file: App.js ~ line 31 ~ handleNumberClick", value);
 
     const isInteger = actionNumber.toString().split(".").length === 1;
-    // 27.5
-    // 65
+    // 65 --> 1 = whole number
+    // 27.5 --> 2 = has a decimal
     console.log("🚀 ~ handleNumberClick ~ isInteger", isInteger, actionNumber);
 
     const newNumberString = `${actionNumber}${
