@@ -135,22 +135,22 @@ function App() {
   const handleCalculate = () => {
     console.log("🚀 ~ handleCalculate ~ handleCalculate", action);
     if (action === "add") {
-      const newValue = memoryNumber + actionNumber;
+      const newValue = Number(memoryNumber) + Number(actionNumber);
       setDisplayNumber(newValue);
       setMemoryNumber(newValue);
-      // setActionNumber(0);
+      setActionNumber(0);
     } else if (action === "minus") {
-      const newValue = memoryNumber - actionNumber;
+      const newValue = Number(memoryNumber) - Number(actionNumber);
       setDisplayNumber(newValue);
       setMemoryNumber(newValue);
       setActionNumber(0);
     } else if (action === "times") {
-      const newValue = memoryNumber * actionNumber;
+      const newValue = Number(memoryNumber) * Number(actionNumber);
       setDisplayNumber(newValue);
       setMemoryNumber(newValue);
       setActionNumber(0);
     } else if (action === "divide") {
-      const newValue = memoryNumber / actionNumber;
+      const newValue = Number(memoryNumber) / Number(actionNumber);
       setDisplayNumber(newValue);
       setMemoryNumber(newValue);
       setActionNumber(0);
