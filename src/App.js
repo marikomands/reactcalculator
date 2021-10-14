@@ -17,6 +17,7 @@ function App() {
   console.log("🚀 ~ App ~ decimal", decimal);
   // const [plusMinus, setPlusMinus] = useState("");
   // const [delete, setDelete] = useState("")
+  const [percentage, setPercentage] = useState("");
 
   console.log("%%%%%% STATE %%%%%%%");
 
@@ -26,6 +27,14 @@ function App() {
     setActionNumber(0);
     setAction("add");
     setDecimal("");
+  };
+
+  const handlePercentage = () => {
+    const percentage = 0.01 * actionNumber;
+    setPercentage(percentage);
+    setDisplayNumber(percentage);
+    console.log(percentage);
+    console.log("🚀 ~ handlePercentage ~ handlePercentage", handlePercentage);
   };
 
   const handleDeleteClick = () => {
@@ -55,6 +64,7 @@ function App() {
   };
 
   const handleNumberClick = (value) => {
+    console.log("🚀 ~ handleNumberClick ~ value", value);
     console.log("🚀 ~ file: App.js ~ line 31 ~ handleNumberClick", value);
 
     const isInteger = actionNumber.toString().split(".").length === 1;
@@ -82,11 +92,13 @@ function App() {
     );
     const newNumber = Number(newNumberString).toFixed(numberOfDecimalPlaces);
 
+    const newNewNumber = Number(newNumber);
+
     console.log("🚀 ~ handleNumberClick ~ newNumber", newNumber);
 
     setDecimal("");
-    setActionNumber(newNumber);
-    setDisplayNumber(newNumber);
+    setActionNumber(newNewNumber);
+    setDisplayNumber(newNewNumber);
     // setMemoryNumber(newNumber);
   };
 
@@ -171,7 +183,9 @@ function App() {
         <button className="button-light-gray" onClick={handlePlusMinus}>
           +/-
         </button>
-        <button className="button-light-gray">%</button>
+        <button className="button-light-gray" onClick={handlePercentage}>
+          %
+        </button>
         <button
           className="button-orange"
           onClick={() => handleActionClick("divide")}
