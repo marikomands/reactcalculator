@@ -33,6 +33,7 @@ function App() {
     const percentage = 0.01 * actionNumber;
     setPercentage(percentage);
     setDisplayNumber(percentage);
+    setActionNumber(percentage);
     console.log(percentage);
     console.log("🚀 ~ handlePercentage ~ handlePercentage", handlePercentage);
   };
@@ -92,13 +93,11 @@ function App() {
     );
     const newNumber = Number(newNumberString).toFixed(numberOfDecimalPlaces);
 
-    const newNewNumber = Number(newNumber);
-
     console.log("🚀 ~ handleNumberClick ~ newNumber", newNumber);
 
     setDecimal("");
-    setActionNumber(newNewNumber);
-    setDisplayNumber(newNewNumber);
+    setActionNumber(newNumber);
+    setDisplayNumber(newNumber);
     // setMemoryNumber(newNumber);
   };
 
