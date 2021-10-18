@@ -46,20 +46,39 @@ function App() {
       "🚀 ~ handleDeleteClick ~ actionNumberString",
       actionNumberString
     );
-    const updatedNumberString = actionNumberString.slice(0, -1);
+
+    const splitNum = actionNumberString.split(".");
+    console.log("🚀 ~ handleDeleteClick ~ splitNum", splitNum);
+    const numbersAfterDecimal = splitNum[1] || "";
+    console.log(
+      "🚀 ~ handleDeleteClick ~ numbersAfterDecimal",
+      numbersAfterDecimal
+    );
+    const numberOfDecimalPlaces = numbersAfterDecimal.length;
+    console.log(
+      "🚀 ~ handleDeleteClick ~ numberOfDecimalPlaces",
+      numberOfDecimalPlaces
+    );
+    const afterDecimalNumber = Number(actionNumberString).toFixed(
+      numberOfDecimalPlaces
+    );
+    console.log(
+      "🚀 ~ handleDeleteClick ~ afterDecimalNumber",
+      afterDecimalNumber
+    );
+
+    const updatedNumberString = afterDecimalNumber.slice(0, -1);
     console.log(
       "🚀 ~ handleDeleteClick ~ updatedNumberString",
       updatedNumberString
     );
 
-    const updatedNumber =
-      updatedNumberString === "-" ? 0 : Number(updatedNumberString);
+    const updatedNumber = updatedNumberString === "" ? 0 : updatedNumberString;
 
-    console.log("🚀 ~ handleDeleteClick ~ updatedNumber", updatedNumber);
+    // console.log("🚀 ~ handleDeleteClick ~ updatedNumber", updatedNumber);
     // '12' = 12
     // '1' = 1
     // '' = 0
-
     setActionNumber(updatedNumber);
     setDisplayNumber(updatedNumber);
   };
