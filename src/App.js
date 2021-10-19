@@ -73,14 +73,26 @@ function App() {
       updatedNumberString
     );
 
-    const updatedNumber = updatedNumberString === "" ? 0 : updatedNumberString;
+    if (afterDecimalNumber === Number(actionNumberString).toFixed(1)) {
+      const updatedNumber = Math.trunc(Number(actionNumberString));
+      setActionNumber(updatedNumber);
+      setDisplayNumber(updatedNumber);
+    } else {
+      const updatedNumber =
+        updatedNumberString === "" ? 0 : updatedNumberString;
+      setActionNumber(updatedNumber);
+      setDisplayNumber(updatedNumber);
+    }
+
+    // const updatedNumber = updatedNumberString === "" ? 0 : updatedNumberString;
 
     // console.log("🚀 ~ handleDeleteClick ~ updatedNumber", updatedNumber);
     // '12' = 12
     // '1' = 1
     // '' = 0
-    setActionNumber(updatedNumber);
-    setDisplayNumber(updatedNumber);
+
+    // setActionNumber(updatedNumber);
+    // setDisplayNumber(updatedNumber);
   };
 
   const handleNumberClick = (value) => {
