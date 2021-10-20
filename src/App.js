@@ -79,7 +79,7 @@ function App() {
       setDisplayNumber(updatedNumber);
     } else {
       const updatedNumber =
-        updatedNumberString === "" ? 0 : updatedNumberString;
+        updatedNumberString === "" ? "0" : updatedNumberString;
       setActionNumber(updatedNumber);
       setDisplayNumber(updatedNumber);
     }
